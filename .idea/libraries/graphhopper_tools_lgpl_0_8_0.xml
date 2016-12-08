@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="graphhopper-tools-lgpl-0.8.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.graphhopper/graphhopper-tools-lgpl/0.8.0/e0e0a64309c01fd45bdb6d34e50e9a77ca4ed109/graphhopper-tools-lgpl-0.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.graphhopper/graphhopper-tools-lgpl/0.8.0/4dbf9a15a11c42c14ae5dbae258a27d60090eb77/graphhopper-tools-lgpl-0.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

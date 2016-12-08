@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/ivan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_b367dd05bdff12eef3eab6305d5fbc2988acb205/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/2.6.1/d9521f2aecb909835746b7a5facf612af5e890e8/protobuf-java-2.6.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="d9521f2aecb909835746b7a5facf612af5e890e8">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/protobuf-java-2.6.1_74a4683932ca2ee76d81446ffc9d979259889213/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.mapsforge/mapsforge-core/0.6.0/c2b05ffa63fe1ba4706596816e5b32cf649a7cc3/mapsforge-core-0.6.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="c2b05ffa63fe1ba4706596816e5b32cf649a7cc3">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/mapsforge-core-0.6.0_bec86063d18f0d4b9cc73c722962c5bcb0d17451/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.13/7fcf30c25b8f4a9379b9dad0d3f487b25272c026/slf4j-api-1.7.13.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="7fcf30c25b8f4a9379b9dad0d3f487b25272c026">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/slf4j-api-1.7.13_ceef5d270a88df30637038029eebb569094bfed0/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/ProgramFiles/android-studio/gradle/m2repository/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ccbc77a5fd907ef863c29f3596c6f54ffa4e9442">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/kxml2-2.3.0_636bb1812c5dcbc38efcd7b1a543d0fb876265f0/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_4fb07e6c27ede1057548a1fc36af2f97189d9965/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/5e303a03d04e6788dddfa3655272580ae0fc13bb/json-simple-1.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/json-simple-1.1_02aef714584fc7219b57f0e462d05146028edc3c/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/1.3.1/b90b6ac57cf27a2858eaa490d02ba7945d18ca7b/commons-io-1.3.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="b90b6ac57cf27a2858eaa490d02ba7945d18ca7b">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/commons-io-1.3.1_7f54259e4bcd688a5baa629a86f964fd5e43e414/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/com.graphhopper/graphhopper/0.6.0/bdcb39dc9e36b0cda3b590923c80105c6231a02/graphhopper-0.6.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="0bdcb39dc9e36b0cda3b590923c80105c6231a02">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/graphhopper-0.6.0_b3394cc6b5588a439f26356c4352ac4bbf74f217/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_5bf7fa7518d0881c60f984b4eb062f2880347670/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/multidex/1.0.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-multidex-1.0.1_9968c2cac1ff3a1d0fefbed78eb45d43e8274778/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.mapsforge/mapsforge-map-android/0.6.0/eb224200c01e1801e4784ac5cb147ea83a1474c0/mapsforge-map-android-0.6.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="eb224200c01e1801e4784ac5cb147ea83a1474c0">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/mapsforge-map-android-0.6.0_f800dffa3519edd72cd1cf03fc53d798ca37d27e/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_cbdf72ead3ffecd32074ad98c3d7b8d0dc71b87a/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="42ccaf4761f0dfdfa805c9e340d99a755907e2dd">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/trove4j-3.0.3_2c1f37130acc65ac206a2a79f6efa5cadd835f6d/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.4.0_9a75881881895d359391921aee1d827ad5c35f55/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/percent/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="91c2541305eec5a688f3a60529d974e48f77d760">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-percent-23.4.0_cb3ca8af3d45148c3d2b3e78e10c5c3ad43d9720/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.apache.xmlgraphics/xmlgraphics-commons/2.0.1/8269d94160a80b70e95602b31052bc5ae74a3583/xmlgraphics-commons-2.0.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="8269d94160a80b70e95602b31052bc5ae74a3583">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/xmlgraphics-commons-2.0.1_3ae1b31cadb3117d7e1ce82c5892a274c3d16d4d/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.mapsforge/mapsforge-map/0.6.0/d0c9e13348ab43d0f2429db2a81228c36ab1a7d9/mapsforge-map-0.6.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="d0c9e13348ab43d0f2429db2a81228c36ab1a7d9">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/mapsforge-map-0.6.0_9e78789d1b558192dbdad0762002e218ce2d59f2/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.openstreetmap.osmosis/osmosis-osm-binary/0.44.1/e0246684bb260f100cd0158433421838e1897e5b/osmosis-osm-binary-0.44.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="e0246684bb260f100cd0158433421838e1897e5b">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/osmosis-osm-binary-0.44.1_6e2b1920207f4f371a9a4e3aa00f1d10ebe14745/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/com.vividsolutions/jts/1.13/3ccfb9b60f04d71add996a666ceb8902904fd805/jts-1.13.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="3ccfb9b60f04d71add996a666ceb8902904fd805">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/jts-1.13_9ed8c4bcc90e45ae65e94a49773e9677dbb59843/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/com.caverock/androidsvg/1.2.2-beta-1/d98fcdbfa06bd8fcca1dab708c0468b9821f3ed9/androidsvg-1.2.2-beta-1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="d98fcdbfa06bd8fcca1dab708c0468b9821f3ed9">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/androidsvg-1.2.2-beta-1_798fefe9fc7be9c9fafa38ca18d602f5a93668b5/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-android/1.7.12/16d02a21e200a67e6ae6bbb3367eebe062a4a769/slf4j-android-1.7.12.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="16d02a21e200a67e6ae6bbb3367eebe062a4a769">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/slf4j-android-1.7.12_eff8e235615877c5a9323c55f02321804039f5f8/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_30f047c3e3423eb31cef8949830079d9c62ea56b/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.4.0_3b7a91bfc98f10547ede0b2fbeed0032440993f1/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.5/686c608d1805b6d4d425ec4459e88164ffc85870/gson-2.5.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.5_3cfa484058bc9a93d9732a9fb4dfa8e00456008c/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/com.graphhopper/graphhopper-tools-lgpl/0.6.0/a3e4cb9a768fe7329d53a8731d3e17fea0253aa5/graphhopper-tools-lgpl-0.6.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="a3e4cb9a768fe7329d53a8731d3e17fea0253aa5">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/graphhopper-tools-lgpl-0.6.0_199266f5155a1531c0a22ac3b7e7abf70fa587dd/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_cb0fd546e4957d3b9be51eb8199fe32303a0ec37/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/.gradle/caches/modules-2/files-2.1/org.mapsforge/mapsforge-map-reader/0.6.0/b962948c1b4c0b37b11fafc80a322cbdcda99616/mapsforge-map-reader-0.6.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="b962948c1b4c0b37b11fafc80a322cbdcda99616">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/mapsforge-map-reader-0.6.0_04a6f2f47e43c6a3dadf679f90c527d20de6bc14/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/libs/CUPUS-1.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="e98ace582020e759f0d6df913d94c05cb04a9327">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/2/CUPUS-1.0_60d93487ad5711b5478fdcfcb6e0ddde59f81b3d/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="1e6ff1abe54244c077c98cdc72219cd84f00a753">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2f61cf68987409be11842a215fd37b1f314d5f09/classes.dex" />
+    </item>
+    <item
+        jar="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="6583e1d56d261dfdd473cfd7d7bf2bdc6d79c56d">
+        <dex dex="/home/ivan/Desktop/IoTeam/IoTeam/android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0c57e386f8e439a8ec7dac0db841519a63843761/classes.dex" />
+    </item>
+
+</items>

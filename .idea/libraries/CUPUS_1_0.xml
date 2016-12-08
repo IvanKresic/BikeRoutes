@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CUPUS-1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/CUPUS-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
