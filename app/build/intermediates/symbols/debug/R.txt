@@ -753,11 +753,11 @@ int id collectGpsText 0x7f0b009f
 int id collect_gps_tag 0x7f0b00a0
 int id connect_button 0x7f0b00a4
 int id contentPanel 0x7f0b0055
-int id currentData 0x7f0b0084
+int id currentKilometerData 0x7f0b0084
+int id currentKilometerValue 0x7f0b0085
 int id currentMap 0x7f0b0097
-int id currentUser 0x7f0b0085
-int id currentUsers 0x7f0b007f
 int id currentUsersText 0x7f0b007e
+int id currentUsersValue 0x7f0b007f
 int id custom 0x7f0b005b
 int id customPanel 0x7f0b005a
 int id dark 0x7f0b0041

@@ -143,7 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:id="@+id/currentUsers"
+                        android:id="@+id/currentUsersValue"
                         android:textSize="25dp"
                         android:layout_marginLeft="10dp"
                         android:layout_below="@+id/currentUsersText"
@@ -186,15 +186,15 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:textSize="14dp"
-                        android:id="@+id/currentData"
+                        android:id="@+id/currentKilometerData"
                         android:text="Total kilometers"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/currentUser"
+                        android:id="@+id/currentKilometerValue"
                         android:textSize="25dp"
                         android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/currentData"
+                        android:layout_below="@+id/currentKilometerData"
                         android:text="12320"/>
 
                 </RelativeLayout>

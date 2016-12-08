@@ -2770,11 +2770,11 @@ containing a value of this type.
         public static final int collect_gps_tag=0x7f0b00a0;
         public static final int connect_button=0x7f0b00a4;
         public static final int contentPanel=0x7f0b0055;
-        public static final int currentData=0x7f0b0084;
+        public static final int currentKilometerData=0x7f0b0084;
+        public static final int currentKilometerValue=0x7f0b0085;
         public static final int currentMap=0x7f0b0097;
-        public static final int currentUser=0x7f0b0085;
-        public static final int currentUsers=0x7f0b007f;
         public static final int currentUsersText=0x7f0b007e;
+        public static final int currentUsersValue=0x7f0b007f;
         public static final int custom=0x7f0b005b;
         public static final int customPanel=0x7f0b005a;
         public static final int dark=0x7f0b0041;
