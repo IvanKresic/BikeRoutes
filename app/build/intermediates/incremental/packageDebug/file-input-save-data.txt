@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Dec 08 16:42:14 CET 2016
+#Thu Dec 08 17:41:11 CET 2016
 20.base=D\:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\resources-debug.ap_
 143.base=D\:\\Moje\\TheProject\\android\\app\\build\\intermediates\\transforms\\mergeJavaRes\\debug\\jars\\2\\1f\\main.jar
 493.base=D\:\\Moje\\TheProject\\android\\app\\build\\intermediates\\transforms\\mergeJavaRes\\debug\\jars\\2\\1f\\main.jar

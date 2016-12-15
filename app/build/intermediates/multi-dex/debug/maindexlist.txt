@@ -88,7 +88,6 @@ android/support/v7/widget/RecyclerView$1.class
 com/google/android/gms/internal/zzqf.class
 android/support/annotation/Nullable.class
 org/bikeroutes/android/MainActivity.class
-org/bikeroutes/android/MainActivity$1.class
 android/support/v4/util/Pools$SimplePool.class
 android/support/v4/util/ArrayMap$1.class
 android/support/annotation/RequiresPermission$Read.class

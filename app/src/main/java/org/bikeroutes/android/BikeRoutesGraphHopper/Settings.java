@@ -17,20 +17,20 @@ import java.util.TimerTask;
  * Created by ivan on 03.06.16..
  */
 public class Settings {
-    EditText ipAddress;
-    EditText publicationTime;
-    EditText gpsTime;
-    TextView connectionStatus;
-    TextView currentMap;
-    Button cupusButton;
-    boolean buttonToggle = false;
-    View v;
-    Context con;
-    TimerTask delayedThreadStartTask;
+    private EditText ipAddress;
+    private EditText publicationTime;
+    private EditText gpsTime;
+    private TextView connectionStatus;
+    private TextView currentMap;
+    private Button cupusButton;
+    private boolean buttonToggle = false;
+    private View v;
+    private Context con;
+    private TimerTask delayedThreadStartTask;
 
     public Settings(View view, Context context)
     {
-        v=view;
+        v = view;
         con = context;
         currentMap = (TextView) view.findViewById(org.bikeroutes.android.R.id.currentMap);
         ipAddress = (EditText) view.findViewById(org.bikeroutes.android.R.id.ipaddress);
@@ -48,10 +48,10 @@ public class Settings {
         connectionStatus.setText(org.bikeroutes.android.R.string.not_connected);
         connectionStatus.setTextColor(con.getResources().getColor(org.bikeroutes.android.R.color.red));
         currentMap.setText(Const.getCurrentMap());
+
         cupusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Timer timer = new Timer();
 
                 if(!buttonToggle)
@@ -63,6 +63,7 @@ public class Settings {
                     delayedThreadStartTask = new TimerTask() {
                         @Override
                         public void run() {
+
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -101,7 +102,4 @@ public class Settings {
         WifiSocketTask mySocket = new WifiSocketTask();
         mySocket.StartArduinoConnectionThread();
     }
-
-
-
 }

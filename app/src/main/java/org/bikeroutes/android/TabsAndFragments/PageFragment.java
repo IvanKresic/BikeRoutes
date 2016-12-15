@@ -3,6 +3,7 @@ package org.bikeroutes.android.TabsAndFragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import org.bikeroutes.android.BikeRoutesGraphHopper.BikeRoutes;
 import org.bikeroutes.android.BikeRoutesGraphHopper.Settings;
+import org.bikeroutes.android.R;
 import org.bikeroutes.android.TabsAndFragments.tabs.Analytics;
 import org.bikeroutes.android.util.Const;
 
@@ -19,6 +21,7 @@ import org.bikeroutes.android.util.Const;
  */
 public class PageFragment extends Fragment{
     public static final String ARG_PAGE = "ARG_PAGE";
+    boolean isAnalyticsLoaded = false;
     private int mPage;
     Context context;
     View view;
@@ -50,7 +53,31 @@ public class PageFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        final MainViewPager mainViewPager = (MainViewPager) getActivity().findViewById(R.id.viewpager);
         context = container.getContext();
+
+        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0)
+                    BikeRoutes.redrawMap();
+                if(position == 1)
+                {
+                    if(isAnalyticsLoaded)
+                        analytics.recreateAllData();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         if(mPage == 1) //MAP
         {
             if(bikeMapAndRouting == null) {
@@ -70,7 +97,8 @@ public class PageFragment extends Fragment{
             {
                 view = inflater.inflate(org.bikeroutes.android.R.layout.activity_analytics, container, false);
                 analytics = new Analytics(view);
-                analytics.setView();
+                analytics.recreateAllData();
+                isAnalyticsLoaded = true;
             }
             return view;
         }
@@ -98,7 +126,7 @@ public class PageFragment extends Fragment{
     public void onPause() {
         Log.e("DEBUG", "onResume of HomeFragment");
         super.onResume();
-        this.getFragmentManager().saveFragmentInstanceState(fragment);
+        //this.getFragmentManager().saveFragmentInstanceState(fragment);
     }
 
     @Override

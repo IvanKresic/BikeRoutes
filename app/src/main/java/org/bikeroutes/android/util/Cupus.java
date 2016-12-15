@@ -202,11 +202,11 @@ public class Cupus {
             if (Const.readyToResetUserDatabase) {
                 myQueries.deleteRecordsFromDatabaseBikeRoutes(Const.getContext());
             }
-            myQueries.readFromDatabaseArduinoData(Const.getContext());
-            if(Const.readyToResetArduinoDatabase)
-            {
-                myQueries.deleteRecordsFromDatabaseArduinoData(Const.getContext());
-            }
+//            myQueries.readFromDatabaseArduinoData(Const.getContext());
+//            if(Const.readyToResetArduinoDatabase)
+//            {
+//                myQueries.deleteRecordsFromDatabaseArduinoData(Const.getContext());
+//            }
         }
     }
 

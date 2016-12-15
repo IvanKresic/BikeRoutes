@@ -782,4 +782,9 @@ public class BikeRoutes {
             return false;
         }
     }
+
+    public static void redrawMap()
+    {
+        mapView.map().updateMap(true);
+    }
 }
