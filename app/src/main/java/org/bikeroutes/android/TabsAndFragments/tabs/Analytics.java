@@ -2,11 +2,22 @@ package org.bikeroutes.android.TabsAndFragments.tabs;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.bikeroutes.android.*;
+import org.bikeroutes.android.util.Const;
+import org.bikeroutes.android.util.restClasses.BikeRoutesRestHttp;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -25,6 +36,8 @@ public class Analytics {
     private TextView currentUsersValue;
     private TextView calculatedRoutesValue;
     private TextView currentKilometerValue;
+    private TimerTask delayedThreadStartTask;
+    JSONObject bikeRoutestRestResponse;
 
     public Analytics(View view)
     {
@@ -38,6 +51,58 @@ public class Analytics {
         currentUsersValue = (TextView) view.findViewById(R.id.currentUsersValue);
         calculatedRoutesValue = (TextView) view.findViewById(R.id.calculatedRoutesValue);
         currentKilometerValue = (TextView) view.findViewById(R.id.currentKilometerValue);
+    }
+
+    public void getdataFromServer()
+    {
+        Timer timer = new Timer();
+        delayedThreadStartTask = new TimerTask() {
+            @Override
+            public void run() {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            getMostPopularRoutes();
+                        }
+                        catch (Exception e)
+                        {
+                            Log.d("Error", "Error retreiving Json Object from Bike Routes Api!");
+                        }
+                        Const.getMainActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //TODO
+                                //Implementirati update-anje UI dijelova sa
+                                //rezultatom rest poziva
+                            }
+                        });
+                    }
+                }).start();
+
+            }
+        };
+        timer.schedule(delayedThreadStartTask, 0);
+    }
+
+
+    public void getMostPopularRoutes() throws JSONException {
+        BikeRoutesRestHttp.get("statuses/public_timeline.json", null, new JsonHttpResponseHandler() {
+            String tweetText;
+
+            @Override
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try{
+                    bikeRoutestRestResponse = response;
+                    tweetText = bikeRoutestRestResponse.getString("text");
+                }
+                catch (Exception e) {
+                    Log.d("Error", "Error retreiving Json Object from Bike Routes Api!");
+                }
+            }
+        });
     }
 
     public void recreateAllData()
