@@ -79,7 +79,7 @@ import java.util.UUID;
  */
 public class BikeRoutes {
 
-    public static MapView mapView;
+    private static MapView mapView;
     private GraphHopper hopper;
     private GeoPoint start;
     private GeoPoint end;
@@ -356,7 +356,7 @@ public class BikeRoutes {
 
     private void chooseAreaFromLocal()
     {
-        List<String> nameList = new ArrayList<String>();
+        List<String> nameList = new ArrayList<>();
         String[] files = mapsFolder.list(new FilenameFilter()
         {
             @Override
@@ -380,7 +380,7 @@ public class BikeRoutes {
 
     private void chooseArea(List<String> nameList)
     {
-        final Map<String, String> nameToFullName = new TreeMap<String, String>();
+        final Map<String, String> nameToFullName = new TreeMap<>();
         for (String fullName : nameList)
         {
             String tmp = Helper.pruneFileEnd(fullName);
@@ -695,12 +695,9 @@ public class BikeRoutes {
             {
                 zoom=true;
             }
-
-            //TODO Remove comment to enable automatic zoom to current location
-
             mark.geoPoint = position;
-            itemizedLayer.removeItem(mark);
             itemizedLayer.addItem(mark);
+            itemizedLayer.map().updateMap(true);
             Const.setLatitude(lati);
             Const.setLongitude(longi);
             Const.setTimestamp(timestamp);

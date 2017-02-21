@@ -36,8 +36,7 @@ public class Analytics {
     private TextView currentUsersValue;
     private TextView calculatedRoutesValue;
     private TextView currentKilometerValue;
-    private TimerTask delayedThreadStartTask;
-    JSONObject bikeRoutestRestResponse;
+    private JSONObject bikeRoutesRestResponse;
 
     public Analytics(View view)
     {
@@ -55,6 +54,7 @@ public class Analytics {
 
     public void getdataFromServer()
     {
+        TimerTask delayedThreadStartTask;
         Timer timer = new Timer();
         delayedThreadStartTask = new TimerTask() {
             @Override
@@ -75,7 +75,7 @@ public class Analytics {
                             public void run() {
                                 //TODO
                                 //Implementirati update-anje UI dijelova sa
-                                //rezultatom rest poziva
+                                //rezultatom rest poziva iz "bikeRoutesRestResponse" json objekta
                             }
                         });
                     }
@@ -95,8 +95,8 @@ public class Analytics {
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try{
-                    bikeRoutestRestResponse = response;
-                    tweetText = bikeRoutestRestResponse.getString("text");
+                    bikeRoutesRestResponse = response;
+                    tweetText = bikeRoutesRestResponse.getString("text");
                 }
                 catch (Exception e) {
                     Log.d("Error", "Error retreiving Json Object from Bike Routes Api!");
