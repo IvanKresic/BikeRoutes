@@ -1,4 +1,4 @@
-#Tue Feb 21 20:50:58 CET 2017
+#Thu Feb 23 00:12:32 CET 2017
 base.0=D\:\\Moje\\TheProject\\android\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.1=classes.dex
 renamed.0=classes2.dex

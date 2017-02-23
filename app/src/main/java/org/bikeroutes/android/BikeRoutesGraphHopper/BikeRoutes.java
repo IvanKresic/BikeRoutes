@@ -163,8 +163,12 @@ public class BikeRoutes {
         { mapsFolder.mkdirs();}
 
         lm.requestLocationUpdates(provider, Const.getGpsDelay(), 0.5f, locationListener);
-
-        position = new GeoPoint(0.0, 0.0);
+        Location lastKnownLocation = lm.getLastKnownLocation(provider);
+        if(lastKnownLocation != null) {
+            position = new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+        }
+        else
+            position = new GeoPoint(0.0,0.0);
         mark = createMarkerItem(position, org.bikeroutes.android.R.drawable.location);
         itemizedLayer.addItem(mark);
     }
@@ -348,6 +352,7 @@ public class BikeRoutes {
             }
         });
 
+        mapView.map().animator().animateTo(position);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
@@ -626,18 +631,18 @@ public class BikeRoutes {
             end = null;
 
             // remove all layers but the first one, which is the map
-            /*int temp_layers_size = layers.size()-1;
-            System.out.println("Sa mape: " +mapView.getLayerManager().getLayers().size());
-            if(temp_layers_size > 2)
+           int temp_layers_size = itemizedLayer.size()-1;
+            Log.d("MAPA", "Sa mape prije brisanja: " +temp_layers_size);
+            if(temp_layers_size > 1)
             {
-                for (int i = temp_layers_size; i>=2;i--) {
-                    layers.remove(i);
+                for (int i = temp_layers_size; i>=1;i--) {
+                    itemizedLayer.removeItem(i);
                 }
-                System.out.println("Sa mape nakon brisanja: " +mapView.getLayerManager().getLayers().size());
-            }*/
+                Log.d("MAPA", "Sa mape nakon brisanja: " +itemizedLayer.size());
+            }
 
             mapView.map().layers().remove(pathLayer);
-            itemizedLayer.removeAllItems();
+            //itemizedLayer.removeAllItems();
 
             itemizedLayer.addItem(createMarkerItem(start, org.bikeroutes.android.R.drawable.flag_green));
             mapView.map().updateMap(true);
@@ -691,10 +696,10 @@ public class BikeRoutes {
             long timestamp = loc.getTime();
 
             position = new GeoPoint(lati, longi);
-            if(!zoom)
-            {
-                zoom=true;
+            if(!zoom) {
+                zoom = true;
             }
+            itemizedLayer.removeItem(mark);
             mark.geoPoint = position;
             itemizedLayer.addItem(mark);
             itemizedLayer.map().updateMap(true);

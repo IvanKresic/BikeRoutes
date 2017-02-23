@@ -5,9 +5,9 @@ import android.animation.ValueAnimator;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.bikeroutes.android.*;
@@ -27,12 +27,12 @@ import java.util.TimerTask;
 public class Analytics {
 
     private View view;
-    private ProgressBar numberOfKilometersDay;
-    private ProgressBar numberOfKilometersDa;
-    private ProgressBar numberOfKilometersWeek;
-    private ProgressBar numberOfKilometersWee;
-    private ProgressBar numberOfKilometersMonth;
-    private ProgressBar numberOfKilometersMont;
+    private ArcProgress numberOfKilometersDay;
+    private ArcProgress numberOfKilometersDa;
+    private ArcProgress numberOfKilometersWeek;
+    private ArcProgress numberOfKilometersWee;
+    private ArcProgress numberOfKilometersMonth;
+    private ArcProgress numberOfKilometersMont;
     private TextView currentUsersValue;
     private TextView calculatedRoutesValue;
     private TextView currentKilometerValue;
@@ -41,12 +41,12 @@ public class Analytics {
     public Analytics(View view)
     {
         this.view = view;
-        numberOfKilometersDay = (ProgressBar) view.findViewById(R.id.numberOfKilometersDay);
-        numberOfKilometersDa = (ProgressBar) view.findViewById(R.id.numberOfKilometersDa);
-        numberOfKilometersWeek = (ProgressBar) view.findViewById(R.id.numberOfKilometersWeek);
-        numberOfKilometersWee = (ProgressBar) view.findViewById(R.id.numberOfKilometersWee);
-        numberOfKilometersMonth = (ProgressBar) view.findViewById(R.id.numberOfKilometersMonth);
-        numberOfKilometersMont = (ProgressBar) view.findViewById(R.id.numberOfKilometersMont);
+        numberOfKilometersDay = (ArcProgress) view.findViewById(R.id.numberOfKilometersDay);
+        numberOfKilometersDa = (ArcProgress) view.findViewById(R.id.numberOfKilometersDa);
+        numberOfKilometersWeek = (ArcProgress) view.findViewById(R.id.numberOfKilometersWeek);
+        numberOfKilometersWee = (ArcProgress) view.findViewById(R.id.numberOfKilometersWee);
+        numberOfKilometersMonth = (ArcProgress) view.findViewById(R.id.numberOfKilometersMonth);
+        numberOfKilometersMont = (ArcProgress) view.findViewById(R.id.numberOfKilometersMont);
         currentUsersValue = (TextView) view.findViewById(R.id.currentUsersValue);
         calculatedRoutesValue = (TextView) view.findViewById(R.id.calculatedRoutesValue);
         currentKilometerValue = (TextView) view.findViewById(R.id.currentKilometerValue);
@@ -115,12 +115,12 @@ public class Analytics {
         ObjectAnimator animationNumberOfKilometersMont;
 
 
-        animationNumberOfKilometersDay = ObjectAnimator.ofInt (numberOfKilometersDay, "progress", 0, 387); // see this max value coming back here, we animale towards that value
-        animationNumberOfKilometersDa = ObjectAnimator.ofInt (numberOfKilometersDa, "progress", 0, 361); // see this max value coming back here, we animale towards that value
-        animationNumberOfKilometersWeek = ObjectAnimator.ofInt (numberOfKilometersWeek, "progress", 0, 461); // see this max value coming back here, we animale towards that value
-        animationNumberOfKilometersWee = ObjectAnimator.ofInt (numberOfKilometersWee, "progress", 0, 411); // see this max value coming back here, we animale towards that value
-        animationNumberOfKilometersMonth = ObjectAnimator.ofInt (numberOfKilometersMonth, "progress", 0, 311); // see this max value coming back here, we animale towards that value
-        animationNumberOfKilometersMont = ObjectAnimator.ofInt (numberOfKilometersMont, "progress", 0, 321); // see this max value coming back here, we animale towards that value
+        animationNumberOfKilometersDay = ObjectAnimator.ofInt (numberOfKilometersDay, "progress", 0, 87); // see this max value coming back here, we animale towards that value
+        animationNumberOfKilometersDa = ObjectAnimator.ofInt (numberOfKilometersDa, "progress", 0, 71); // see this max value coming back here, we animale towards that value
+        animationNumberOfKilometersWeek = ObjectAnimator.ofInt (numberOfKilometersWeek, "progress", 0, 11); // see this max value coming back here, we animale towards that value
+        animationNumberOfKilometersWee = ObjectAnimator.ofInt (numberOfKilometersWee, "progress", 0, 31); // see this max value coming back here, we animale towards that value
+        animationNumberOfKilometersMonth = ObjectAnimator.ofInt (numberOfKilometersMonth, "progress", 0, 51); // see this max value coming back here, we animale towards that value
+        animationNumberOfKilometersMont = ObjectAnimator.ofInt (numberOfKilometersMont, "progress", 0, 21); // see this max value coming back here, we animale towards that value
 
         animationNumberOfKilometersDay.setDuration (1500);
         animationNumberOfKilometersDa.setDuration (1500);

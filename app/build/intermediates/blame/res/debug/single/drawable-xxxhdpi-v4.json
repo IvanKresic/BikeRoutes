@@ -16,12 +16,12 @@
         "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-places\\9.4.0\\res\\drawable-xxxhdpi-v4\\places_ic_search.png"
     },
     {
-        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\powered_by_google_light.png",
-        "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-places\\9.4.0\\res\\drawable-xxxhdpi-v4\\powered_by_google_light.png"
-    },
-    {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\places_ic_clear.png",
         "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-places\\9.4.0\\res\\drawable-xxxhdpi-v4\\places_ic_clear.png"
+    },
+    {
+        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\powered_by_google_light.png",
+        "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-places\\9.4.0\\res\\drawable-xxxhdpi-v4\\powered_by_google_light.png"
     },
     {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
