@@ -1,20 +1,26 @@
 package org.bikeroutes.android;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
 import org.bikeroutes.android.TabsAndFragments.MainViewPager;
+import org.bikeroutes.android.TabsAndFragments.PageFragment;
 import org.bikeroutes.android.TabsAndFragments.SampleFragmentPagerAdapter;
 import org.bikeroutes.android.TabsAndFragments.tabs.Analytics;
 import org.bikeroutes.android.util.Const;
 
 public class MainActivity extends AppCompatActivity
 {
+
+    public static SampleFragmentPagerAdapter pagerAdapter;
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -56,13 +62,12 @@ public class MainActivity extends AppCompatActivity
         final MainViewPager mainViewPager = (MainViewPager) findViewById(R.id.viewpager);
 
         mainViewPager.setPagingEnabled(false);
-        SampleFragmentPagerAdapter pagerAdapter = new SampleFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this);
+        pagerAdapter = new SampleFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this);
         mainViewPager.setAdapter(pagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mainViewPager);
     }
-
 
 
     /**

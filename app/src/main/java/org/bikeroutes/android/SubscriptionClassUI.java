@@ -2,6 +2,9 @@ package org.bikeroutes.android;
 
 import android.graphics.drawable.Drawable;
 import org.bikeroutes.android.util.Const;
+
+import com.graphhopper.PathWrapper;
+import com.graphhopper.util.PointList;
 import com.vividsolutions.jts.geom.Coordinate;
 
 import org.oscim.android.canvas.AndroidGraphics;
@@ -12,6 +15,7 @@ import org.oscim.layers.PathLayer;
 import org.oscim.layers.marker.ItemizedLayer;
 import org.oscim.layers.marker.MarkerItem;
 import org.oscim.layers.marker.MarkerSymbol;
+import org.oscim.layers.vector.geometries.Style;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,10 +62,10 @@ public class SubscriptionClassUI {
 
                 break;
             case 5:
-                mapView.map().layers().add(createPolyline(coordinates));
+                mapView.map().layers().add(createPathLayer(coordinates));
                 break;
             case 6:
-                mapView.map().layers().add(createPolyline(coordinates));
+                mapView.map().layers().add(createPathLayer(coordinates));
                 break;
             default:
                 resetAndInflateTheMap(coordinates, R.drawable.hifi);
@@ -106,6 +110,21 @@ public class SubscriptionClassUI {
         for (Coordinate coordinate: response) {
             geoPoints.add(new GeoPoint(coordinate.x, coordinate.y));
         }
+        return line;
+    }
+
+    private org.oscim.layers.vector.PathLayer createPathLayer(Coordinate[] response) {
+        Style style = Style.builder()
+                .generalization(Style.GENERALIZATION_SMALL)
+                .strokeColor(0x9900cc33)
+                .strokeWidth(4 * Const.getContext().getResources().getDisplayMetrics().density)
+                .build();
+        org.oscim.layers.vector.PathLayer line = new org.oscim.layers.vector.PathLayer(mapView.map(), style);
+        List<GeoPoint> geoPoints = new ArrayList<>();
+        for (Coordinate coordinate: response) {
+            geoPoints.add(new GeoPoint(coordinate.x, coordinate.y));
+        }
+        line.setPoints(geoPoints);
         return line;
     }
 }

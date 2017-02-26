@@ -58,12 +58,15 @@ dependencies {
     }
     compile 'com.android.support:multidex:1.0.1'
     compile files('libs/CUPUS-1.0.jar')
-    compile 'org.mapsforge:vtm:0.6.0'
-    compile 'org.mapsforge:vtm-android:0.6.0'
+    compile 'org.mapsforge:vtm:0.7.0-rc2'
+    //compile 'org.mapsforge:vtm:0.6.0'
+    compile 'org.mapsforge:vtm-android:0.7.0-rc2'
+    //compile 'org.mapsforge:vtm-android:0.6.0'
     compile 'org.mapsforge:vtm-android:0.6.0:natives-armeabi'
     compile 'org.mapsforge:vtm-android:0.6.0:natives-armeabi-v7a'
     compile 'org.mapsforge:vtm-android:0.6.0:natives-x86'
-    compile 'org.mapsforge:vtm-jts:0.6.0'
+    compile 'org.mapsforge:vtm-jts:0.7.0-rc2'
+    //compile 'org.mapsforge:vtm-jts:0.6.0'
     compile 'org.mapsforge:vtm-themes:0.6.0'
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
     compile 'com.vividsolutions:jts:1.13'

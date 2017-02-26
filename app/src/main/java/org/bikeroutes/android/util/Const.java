@@ -2,9 +2,11 @@ package org.bikeroutes.android.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
+import org.bikeroutes.android.TabsAndFragments.PageFragment;
 import org.oscim.android.MapView;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class Const {
     public static boolean readyToResetUserDatabase = false;
     public static boolean readyToResetArduinoDatabase = false;
     public static String fullPathToFile;
+    public static View savedFragment;
 
     public static MapView getMapView() {
         return mapView;

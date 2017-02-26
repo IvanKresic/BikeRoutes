@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.graphhopper.GHRequest;
 import com.graphhopper.GHResponse;
 import com.graphhopper.GraphHopper;
@@ -64,6 +67,7 @@ import org.oscim.theme.VtmThemes;
 import org.oscim.theme.XmlRenderThemeStyleLayer;
 import org.oscim.theme.XmlRenderThemeStyleMenu;
 import org.oscim.tiling.source.mapfile.MapFileTileSource;
+import org.w3c.dom.Attr;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -77,7 +81,7 @@ import java.util.UUID;
 /**
  * Created by ivan on 02.06.16..
  */
-public class BikeRoutes {
+public class BikeRoutes{
 
     private static MapView mapView;
     private GraphHopper hopper;
@@ -106,11 +110,13 @@ public class BikeRoutes {
     private View apiCall;
     private String provider;
     private Activity activity;
+    private RelativeLayout mapLayout;
 
     public BikeRoutes(Context cont, View view)
     {
         context = cont;
         fragmentView = view;
+        Const.savedFragment = view;
     }
 
     public void setLocationListener()
@@ -136,13 +142,22 @@ public class BikeRoutes {
         locationListener = new MyLocationListener();
     }
 
-    public void setMapView(Activity activity)
-    {
+    public void setMapView(Activity activity) {
         this.activity = activity;
         Tile.SIZE = Tile.calculateTileSize(activity.getResources().getDisplayMetrics().scaledDensity);
 
+        try {
+            mapLayout.removeView(mapView);
+        }
+        catch (Exception e)
+        {
+            Log.d("DEBUG", "Map not added yet!");
+            e.getMessage();
+        }
+
         mapView = new MapView(activity.getApplicationContext());
-        Const.setMapView(mapView);
+
+
         mapView.setClickable(true);
         itemizedLayer = new ItemizedLayer<>(mapView.map(), (MarkerSymbol) null);
 
@@ -254,6 +269,12 @@ public class BikeRoutes {
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 activity.getFragmentManager().findFragmentById(org.bikeroutes.android.R.id.place_autocomplete_fragment);
 
+
+        LatLngBounds latLngBounds = new LatLngBounds(
+            new LatLng(48.103967, 16.249577),//S-E
+                new LatLng(48.290364, 16.464802)//N-W
+         );
+        autocompleteFragment.setBoundsBias(latLngBounds);
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -474,6 +495,7 @@ public class BikeRoutes {
     private void loadMap( File areaFolder )
     {
         // Long press receiver
+
         mapView.map().layers().add(new LongPressLayer(mapView.map()));
 
 
@@ -499,7 +521,7 @@ public class BikeRoutes {
             e.getMessage();
         }
         mapView.map().setMapPosition(mapCenter.getLatitude(), mapCenter.getLongitude(), 1 << 15);
-        RelativeLayout mapLayout = (RelativeLayout) fragmentView.findViewById(org.bikeroutes.android.R.id.map_layout);
+        mapLayout = (RelativeLayout) Const.savedFragment.findViewById(org.bikeroutes.android.R.id.map_layout);
         mapLayout.addView(mapView, 0);
         loadGraphStorage();
     }
@@ -737,6 +759,9 @@ public class BikeRoutes {
         }
     }
 
+
+
+
     private boolean isReady()
     {
         // only return true if already loaded
@@ -785,8 +810,18 @@ public class BikeRoutes {
         }
     }
 
-    public static void redrawMap()
+    public static void pauseMap()
     {
+        Log.e("DEBUG", "onPause of Map Home Fragment");
+        mapView.onPause();
+    }
+
+    public static void resumeMap()
+    {
+        Log.e("DEBUG", "onResume of Map Home Fragment");
+
+        mapView.onResume();
+        mapView.map().clearMap();
         mapView.map().updateMap(true);
     }
 }
