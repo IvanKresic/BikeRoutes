@@ -67,7 +67,6 @@ public class Settings {
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Cupus.connectPublisher();
                                     Cupus.sendPublicationCustom();
                                     Const.getMainActivity().runOnUiThread(new Runnable() {
                                         @Override
@@ -82,12 +81,13 @@ public class Settings {
 
                         }
                     };
-                    timer.schedule(delayedThreadStartTask, Const.getDelay() * 1000, Const.getDelay() * 1000);
+                    timer.schedule(delayedThreadStartTask, Const.getDelay() * 100, Const.getDelay() * 500);
                     buttonToggle = true;
                 }
                 else
                 {
                     delayedThreadStartTask.cancel();
+                    Cupus.disconnectPublisher();
                     connectionStatus.setText(org.bikeroutes.android.R.string.not_connected);
                     connectionStatus.setTextColor(con.getResources().getColor(org.bikeroutes.android.R.color.red));
                     cupusButton.setText(org.bikeroutes.android.R.string.connect_button_text);

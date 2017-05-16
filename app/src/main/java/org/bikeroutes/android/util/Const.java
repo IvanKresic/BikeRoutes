@@ -2,10 +2,12 @@ package org.bikeroutes.android.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
+import org.bikeroutes.android.R;
 import org.bikeroutes.android.TabsAndFragments.PageFragment;
 import org.oscim.android.MapView;
 
@@ -117,10 +119,7 @@ public class Const {
 
     public static void setBrokerIpAddress(String address)
     {
-        if(!address.equals(""))
-        {
             BrokerIpAddress = address;
-        }
     }
 
     public static String getBrokerIpAddress()

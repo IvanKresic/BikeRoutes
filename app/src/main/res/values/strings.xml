@@ -19,6 +19,7 @@
     <string name="connected">Connected</string>
     <string name="mymap"></string>
     <string name="google_maps_key">AIzaSyBI9uA53_utpBWnKLLs-yiqT94Q4wa0miI</string>
+    <string name="broker_ip_address">161.53.19.88</string>
 
 
 </resources>

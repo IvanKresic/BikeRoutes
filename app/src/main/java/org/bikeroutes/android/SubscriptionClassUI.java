@@ -1,17 +1,13 @@
 package org.bikeroutes.android;
-
 import android.graphics.drawable.Drawable;
 import org.bikeroutes.android.util.Const;
-
-import com.graphhopper.PathWrapper;
-import com.graphhopper.util.PointList;
 import com.vividsolutions.jts.geom.Coordinate;
-
+import org.oscim.android.MapView;
 import org.oscim.android.canvas.AndroidGraphics;
 import org.oscim.backend.canvas.Bitmap;
 import org.oscim.backend.canvas.Paint;
 import org.oscim.core.GeoPoint;
-import org.oscim.layers.PathLayer;
+import org.oscim.layers.vector.PathLayer;
 import org.oscim.layers.marker.ItemizedLayer;
 import org.oscim.layers.marker.MarkerItem;
 import org.oscim.layers.marker.MarkerSymbol;
@@ -20,19 +16,22 @@ import org.oscim.layers.vector.geometries.Style;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.bikeroutes.android.util.Cupus.mapView;
-
 /**
  * Created by ivan on 16.06.16..
  */
 public class SubscriptionClassUI {
 
+    private MapView mapView;
     private ItemizedLayer eventMark;
-    private List<ItemizedLayer>  listOfItems;
-    public void drawSubscriptionOnMap(int shapeType) {
-        eventMark = new ItemizedLayer<>(mapView.map(), (MarkerSymbol) null);
-        mapView.map().layers().add(eventMark);
+    private List<ItemizedLayer> listOfItems;
+    private int category;
+    public void drawSubscriptionOnMap(int shapeType, int category) {
+
+        mapView = Const.getMapView();
+       //eventMark = new ItemizedLayer<>(mapView.map(), (MarkerSymbol) null);
+       //mapView.map().layers().add(eventMark);
         listOfItems = new ArrayList<>();
+        this.category = category;
         Coordinate[] coordinates = Const.getCoordinates1();
 
         /*
@@ -62,10 +61,10 @@ public class SubscriptionClassUI {
 
                 break;
             case 5:
-                mapView.map().layers().add(createPathLayer(coordinates));
+                mapView.map().layers().add(createPathLayer(coordinates, getColor(category)));
                 break;
             case 6:
-                mapView.map().layers().add(createPathLayer(coordinates));
+                mapView.map().layers().add(createPathLayer(coordinates, getColor(category)));
                 break;
             default:
                 resetAndInflateTheMap(coordinates, R.drawable.hifi);
@@ -97,14 +96,14 @@ public class SubscriptionClassUI {
         return myMarker;
     }
 
-    private PathLayer createPolyline(Coordinate[] response)
+    private PathLayer createPolyline(Coordinate[] response, int color)
     {
         PathLayer line;
         Paint paintStroke = AndroidGraphics.newPaint();
         paintStroke.setStyle(Paint.Style.STROKE);
-        paintStroke.setColor(android.graphics.Color.argb(170, 0, 3, 230));
+        paintStroke.setColor(color);
         paintStroke.setStrokeWidth(8);
-        line = new PathLayer(mapView.map(), android.graphics.Color.argb(170, 0, 3, 230));
+        line = new PathLayer(mapView.map(), color);
 
         List<GeoPoint> geoPoints = line.getPoints();
         for (Coordinate coordinate: response) {
@@ -113,18 +112,48 @@ public class SubscriptionClassUI {
         return line;
     }
 
-    private org.oscim.layers.vector.PathLayer createPathLayer(Coordinate[] response) {
+    private PathLayer createPathLayer(Coordinate[] response, String color) {
+        List<GeoPoint> geoPoints = new ArrayList<>();
         Style style = Style.builder()
                 .generalization(Style.GENERALIZATION_SMALL)
-                .strokeColor(0x9900cc33)
+                .strokeColor(color)
                 .strokeWidth(4 * Const.getContext().getResources().getDisplayMetrics().density)
                 .build();
-        org.oscim.layers.vector.PathLayer line = new org.oscim.layers.vector.PathLayer(mapView.map(), style);
-        List<GeoPoint> geoPoints = new ArrayList<>();
+        PathLayer line = new PathLayer(mapView.map(), style);
+
         for (Coordinate coordinate: response) {
-            geoPoints.add(new GeoPoint(coordinate.x, coordinate.y));
+            if(!Double.isNaN(coordinate.z)) {
+                geoPoints.add(new GeoPoint(coordinate.x, coordinate.y));
+                geoPoints.add(new GeoPoint(coordinate.y, coordinate.z));
+            }
+            else{
+                geoPoints.add(new GeoPoint(coordinate.x, coordinate.y));
+            }
         }
         line.setPoints(geoPoints);
         return line;
+    }
+
+    private String getColor(int category)
+    {
+        String pathColor = "";
+
+        if(category == 0)
+        {
+            pathColor = "#0000ff";
+        }
+        if(category == 1)
+        {
+            pathColor = "#cc0000";
+        }
+        else if(category == 2)
+        {
+            pathColor = "#eabd03";
+        }
+        else if(category == 3)
+        {
+            pathColor = "#00d848";
+        }
+        return pathColor;
     }
 }

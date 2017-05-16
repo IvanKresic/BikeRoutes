@@ -9,6 +9,7 @@ cz/msebera/android/httpclient/params/HttpParamsNames.class
 android/support/design/R$layout.class
 com/google/firebase/FirebaseException.class
 android/support/v4/view/NestedScrollingParent.class
+org/apache/commons/codec/language/Caverphone.class
 android/support/v4/view/MenuCompat.class
 android/support/v4/media/session/MediaControllerCompat.class
 com/google/gson/JsonNull.class
@@ -173,6 +174,7 @@ android/support/annotation/DimenRes.class
 android/support/annotation/TransitionRes.class
 cz/msebera/android/httpclient/params/HttpProtocolParams.class
 android/support/annotation/MainThread.class
+org/apache/commons/codec/digest/DigestUtils.class
 cz/msebera/android/httpclient/impl/client/DefaultRedirectStrategy.class
 android/support/design/widget/AppBarLayout$1.class
 cz/msebera/android/httpclient/client/methods/AbstractExecutionAwareRequest.class
@@ -266,6 +268,7 @@ android/support/design/widget/ValueAnimatorCompat$AnimatorUpdateListener.class
 cz/msebera/android/httpclient/params/BasicHttpParams.class
 android/support/v4/media/MediaBrowserCompat$ItemCallback.class
 com/google/android/gms/dynamic/zzg$zza.class
+org/apache/commons/codec/language/Soundex.class
 android/support/annotation/ColorRes.class
 cz/msebera/android/httpclient/protocol/ImmutableHttpProcessor.class
 android/support/design/widget/Snackbar$SnackbarLayout$OnLayoutChangeListener.class
@@ -512,6 +515,7 @@ cz/msebera/android/httpclient/conn/scheme/SchemeSocketFactory.class
 android/support/v7/app/ActionBar$NavigationMode.class
 android/support/v7/view/ActionMode.class
 android/support/v4/app/BaseFragmentActivityHoneycomb.class
+org/apache/commons/codec/StringEncoderComparator.class
 android/support/v4/app/ActivityCompatApi23$RequestPermissionsRequestCodeValidator.class
 android/support/design/widget/Snackbar$8.class
 android/support/v4/media/VolumeProviderCompatApi21.class
@@ -577,6 +581,7 @@ android/support/design/widget/Snackbar.class
 org/bikeroutes/android/AnalyticsActivity$4.class
 android/support/v7/app/ActionBarDrawerToggle$DelegateProvider.class
 android/support/v4/app/BaseFragmentActivityDonut.class
+org/apache/commons/codec/language/bm/Rule$Phoneme.class
 android/support/v7/appcompat/R$style.class
 cz/msebera/android/httpclient/impl/SocketHttpClientConnection.class
 android/support/design/widget/TabLayout$PagerAdapterObserver.class
@@ -586,6 +591,7 @@ cz/msebera/android/httpclient/impl/cookie/DateUtils.class
 android/support/design/widget/CoordinatorLayout$ViewElevationComparator.class
 android/support/v4/app/FragmentManager.class
 com/google/android/gms/location/places/personalized/PlaceUserData.class
+org/apache/commons/codec/binary/Base64.class
 com/google/android/gms/internal/zzqc.class
 android/support/design/widget/CoordinatorLayout$1.class
 android/support/annotation/AttrRes.class
@@ -613,6 +619,7 @@ android/support/v4/app/BaseFragmentActivityEclair.class
 android/support/v4/view/ViewCompat$ICSMr1ViewCompatImpl.class
 cz/msebera/android/httpclient/impl/client/AuthenticationStrategyAdaptor.class
 android/support/design/widget/CoordinatorLayout$OnPreDrawListener.class
+org/apache/commons/codec/net/URLCodec.class
 cz/msebera/android/httpclient/impl/conn/tsccm/ConnPoolByRoute.class
 android/support/v4/app/NotificationCompat$Builder.class
 android/support/annotation/IntRange.class

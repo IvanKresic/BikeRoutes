@@ -1,11 +1,14 @@
 package org.bikeroutes.android.databaseCommunication;
 
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import org.bikeroutes.android.R;
 import org.bikeroutes.android.util.Const;
 import com.vividsolutions.jts.geom.Coordinate;
 
@@ -17,6 +20,10 @@ import org.openiot.cupus.entity.publisher.Publisher;
  */
 public class SQLiteQueries  {
 
+    private Publisher publisherUserData;
+    static int publication_duration = 1800000;//30 minutes
+    private static Boolean isReadyToSendPublication = false;
+    private String subs;
 
     public void insertIntoTableBikeRoutes(Context conn, String UID, double lat, double longi, long time)
     {
@@ -31,19 +38,16 @@ public class SQLiteQueries  {
 
         db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
         db.close();
+        mDbHelper.close();
+    }
+
+    public void setAndConnectUserDataPublisher(Publisher publisherUserData)
+    {
+        this.publisherUserData = publisherUserData;
     }
 
     public void readFromDatabaseBikeRoutes(Context conn)
     {
-        Publisher publisherUserData = new Publisher("UserData", Const.getBrokerIpAddress(), 10000);
-        publisherUserData.connect();
-
-        HashtablePublication UserPublication  = new HashtablePublication(-1, System.currentTimeMillis());
-        UserPublication.setProperty("DataType","User");
-        UserPublication.setProperty("UUID", Const.DeviceId);
-
-
-
         FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(conn);
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -59,32 +63,42 @@ public class SQLiteQueries  {
                 projection, null, null, null, null, null
         );
 
-        int rowsIndDatabase = c.getCount();
+        int rowsInDatabase = c.getCount();
 
-        Coordinate[] coordinates = new Coordinate[rowsIndDatabase];
+        Coordinate[] coordinates = new Coordinate[rowsInDatabase];
         String timestamp = "";
 
-        Log.d("BAZA", "Prije slanja korisnika: "+rowsIndDatabase);
-        if(rowsIndDatabase != 0) {
+        Log.d("BAZA", "Prije slanja korisnika: "+rowsInDatabase);
+        if(rowsInDatabase > 3 && rowsInDatabase != 0) {
             int i = 0;
             c.moveToFirst();
             while (!c.isAfterLast()) {
                 double lat = c.getDouble(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LATITUDE));
                 double longi = c.getDouble(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LONGITUDE));
                 long time = c.getLong(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_TIMESTAPM));
-                coordinates[i] = new Coordinate(lat,longi);
+                coordinates[i] = new Coordinate(lat, longi);
                 timestamp += time + ",";
                 i++;
                 c.moveToNext();
             }
-            String subs = timestamp.substring(0, timestamp.length()-1);
-            UserPublication.setProperty("Timestamp", subs);
-            UserPublication.setGPSCoordinates(coordinates);
+
+            try {
+                subs = timestamp.substring(0, timestamp.length() - 1);
+            } catch (Exception e) {
+                e.getMessage();
+            }
+            HashtablePublication userPublication = new HashtablePublication(-1, System.currentTimeMillis());
+            userPublication.setProperty("DataType", "RoutesFromUser");
+            userPublication.setProperty("UUID", Const.DeviceId);
+            userPublication.setProperty("Timestamp", subs);
+            userPublication.setGPSCoordinates(coordinates);
+            publisherUserData.publish(userPublication);
+            Log.d("PUBLICATION: ", " " + userPublication.getProperties().get("DataType"));
+            c.close();
+            db.close();
+            mDbHelper.close();
+            Const.readyToResetUserDatabase = true;
         }
-        publisherUserData.publish(UserPublication);
-        c.close();
-        db.close();
-        Const.readyToResetUserDatabase = true;
     }
 
     public void deleteRecordsFromDatabaseBikeRoutes(Context conn)

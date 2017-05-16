@@ -8,12 +8,12 @@
         "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_radio_material.xml"
     },
     {
-        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
-        "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
-    },
-    {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_plus_signin_btn_icon_dark.xml",
         "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\drawable\\common_plus_signin_btn_icon_dark.xml"
+    },
+    {
+        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
     },
     {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_tab_indicator_material.xml",
@@ -108,12 +108,12 @@
         "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
     },
     {
-        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
-        "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
-    },
-    {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\common_google_signin_btn_text_dark.xml",
         "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\drawable\\common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\circle.xml",
@@ -152,12 +152,12 @@
         "source": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\drawable\\common_google_signin_btn_text_light.xml"
     },
     {
-        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\flag_red.png",
-        "source": "D:\\Moje\\TheProject\\android\\app\\src\\main\\res\\drawable\\flag_red.png"
-    },
-    {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\logo.png",
         "source": "D:\\Moje\\TheProject\\android\\app\\src\\main\\res\\drawable\\logo.png"
+    },
+    {
+        "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\flag_red.png",
+        "source": "D:\\Moje\\TheProject\\android\\app\\src\\main\\res\\drawable\\flag_red.png"
     },
     {
         "merged": "D:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\hifi.png",

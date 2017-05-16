@@ -16,7 +16,6 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +36,7 @@ import com.graphhopper.GraphHopper;
 import com.graphhopper.PathWrapper;
 import org.bikeroutes.android.AndroidHelper;
 import org.bikeroutes.android.GHAsyncTask;
+import org.bikeroutes.android.R;
 import org.bikeroutes.android.databaseCommunication.SQLiteQueries;
 import org.bikeroutes.android.util.Const;
 import org.bikeroutes.android.util.Cupus;
@@ -45,11 +45,13 @@ import com.graphhopper.util.Helper;
 import com.graphhopper.util.PointList;
 import com.graphhopper.util.ProgressListener;
 import com.graphhopper.util.StopWatch;
-
 import org.oscim.android.MapView;
 import org.oscim.android.canvas.AndroidGraphics;
 import org.oscim.backend.canvas.Bitmap;
 import org.oscim.core.GeoPoint;
+import org.oscim.core.GeometryBuffer;
+import org.oscim.core.Tag;
+import org.oscim.core.TagSet;
 import org.oscim.core.Tile;
 import org.oscim.event.Gesture;
 import org.oscim.event.GestureListener;
@@ -63,25 +65,41 @@ import org.oscim.layers.tile.vector.VectorTileLayer;
 import org.oscim.layers.tile.vector.labeling.LabelLayer;
 import org.oscim.layers.vector.PathLayer;
 import org.oscim.layers.vector.geometries.Style;
+import org.oscim.map.Layers;
+import org.oscim.renderer.MapRenderer;
+import org.oscim.theme.ExternalRenderTheme;
+import org.oscim.theme.IRenderTheme;
+import org.oscim.theme.ThemeFile;
+import org.oscim.theme.ThemeLoader;
 import org.oscim.theme.VtmThemes;
 import org.oscim.theme.XmlRenderThemeStyleLayer;
 import org.oscim.theme.XmlRenderThemeStyleMenu;
+import org.oscim.theme.XmlThemeBuilder;
+import org.oscim.theme.rule.Rule;
+import org.oscim.theme.styles.RenderStyle;
 import org.oscim.tiling.source.mapfile.MapFileTileSource;
-import org.w3c.dom.Attr;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
+
 
 /**
  * Created by ivan on 02.06.16..
  */
-public class BikeRoutes{
+public class BikeRoutes {
 
     private static MapView mapView;
     private GraphHopper hopper;
@@ -94,6 +112,7 @@ public class BikeRoutes{
     //private String prefixURL = fileListURL;
     private String downloadURL;
     private File mapsFolder;
+    private File themeFolder;
     private LocationManager lm;
     private LocationListener locationListener;
     private static TelephonyManager tm;
@@ -111,6 +130,7 @@ public class BikeRoutes{
     private String provider;
     private Activity activity;
     private RelativeLayout mapLayout;
+    VectorTileLayer vectorTileLayer;
 
     public BikeRoutes(Context cont, View view)
     {
@@ -142,25 +162,8 @@ public class BikeRoutes{
         locationListener = new MyLocationListener();
     }
 
-    public void setMapView(Activity activity) {
-        this.activity = activity;
-        Tile.SIZE = Tile.calculateTileSize(activity.getResources().getDisplayMetrics().scaledDensity);
-
-        try {
-            mapLayout.removeView(mapView);
-        }
-        catch (Exception e)
-        {
-            Log.d("DEBUG", "Map not added yet!");
-            e.getMessage();
-        }
-
-        mapView = new MapView(activity.getApplicationContext());
-
-
-        mapView.setClickable(true);
-        itemizedLayer = new ItemizedLayer<>(mapView.map(), (MarkerSymbol) null);
-
+    private void setMapsFolder()
+    {
         boolean greaterOrEqKitkat = Build.VERSION.SDK_INT >= 19;
         if (greaterOrEqKitkat)
         {
@@ -171,8 +174,35 @@ public class BikeRoutes{
             }
             mapsFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                     "/graphhopper/maps/");
+            themeFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                    "/graphhopper/themes/bike_routes_cyclist_theme.xml");
         } else
+        {
             mapsFolder = new File(Environment.getExternalStorageDirectory(), "/graphhopper/maps/");
+            themeFolder = new File(Environment.getExternalStorageDirectory(), "/graphhopper/themes/bike_routes_cyclist_theme.xml");
+        }
+    }
+
+    public void setMapView(Activity activity) {
+        this.activity = activity;
+        Tile.SIZE = Tile.calculateTileSize(activity.getResources().getDisplayMetrics().scaledDensity);
+        try {
+            mapLayout.removeView(mapView);
+        }
+        catch (Exception e)
+        {
+            Log.d("DEBUG", "Map not added yet!");
+            e.getMessage();
+        }
+
+        mapView = new MapView(activity.getApplicationContext());
+        Const.setMapView(mapView);
+
+
+        mapView.setClickable(true);
+        itemizedLayer = new ItemizedLayer<>(mapView.map(), (MarkerSymbol) null);
+
+        setMapsFolder();
 
         if (!mapsFolder.exists())
         { mapsFolder.mkdirs();}
@@ -186,6 +216,21 @@ public class BikeRoutes{
             position = new GeoPoint(0.0,0.0);
         mark = createMarkerItem(position, org.bikeroutes.android.R.drawable.location);
         itemizedLayer.addItem(mark);
+//        try {
+//            setXmlRenderTheme();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    private void setXmlRenderTheme() throws FileNotFoundException {
+        IRenderTheme theme = ThemeLoader.load(themeFolder.getAbsolutePath());
+        vectorTileLayer = new VectorTileLayer(mapView.map(), 16);
+        vectorTileLayer.setRenderTheme(theme);
+        MapRenderer.setBackgroundColor(theme.getMapBackground());
+
+        mapView.map().clearMap();
+        mapView.map().updateMap(true);
     }
 
     public void setUserDeviceId()
@@ -206,7 +251,7 @@ public class BikeRoutes{
     public void createAndInitializeAllUIObjects(final Activity activity)
     {
         ImageButton enterStartAndEndPoint;
-        Button calculateRouteButton;
+        final Button calculateRouteButton;
         ImageButton callApiButton;
         Button eventsButton;
         Button temperatureButton;
@@ -248,23 +293,31 @@ public class BikeRoutes{
                 {
                     routingData.setVisibility(View.VISIBLE);
                 }
+                calculateRouteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if(position != null) {
+                            start = position;
+                            itemizedLayer.addItem(createMarkerItem(start, org.bikeroutes.android.R.drawable.flag_red));
+                            itemizedLayer.addItem(createMarkerItem(end, org.bikeroutes.android.R.drawable.flag_green));
+                            mapView.map().updateMap(true);
+                        }
+                        try {
+                            calcPath(start.getLatitude(), start.getLongitude(), end.getLatitude(),
+                                    end.getLongitude());
+                        }
+                        catch (Exception e)
+                        {
+                            log("Please select valid street");
+                        }
+                        routingData.setVisibility(View.GONE);
+                    }
+                });
             }
         });
 
-        calculateRouteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if(position != null) {
-                    start = position;
-                    itemizedLayer.addItem(createMarkerItem(start, org.bikeroutes.android.R.drawable.flag_red));
-                    itemizedLayer.addItem(createMarkerItem(end, org.bikeroutes.android.R.drawable.flag_green));
-                    mapView.map().updateMap(true);
-                }
-                calcPath(start.getLatitude(), start.getLongitude(), end.getLatitude(),
-                        end.getLongitude());
-            }
-        });
 
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 activity.getFragmentManager().findFragmentById(org.bikeroutes.android.R.id.place_autocomplete_fragment);
@@ -307,17 +360,11 @@ public class BikeRoutes{
                 }
             }
         });
-        calculateRouteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                routingData.setVisibility(View.GONE);
-            }
-        });
         eventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cupus.initializeTriplet(0);
                 apiCall.setVisibility(View.GONE);
+                Cupus.initializeTriplet(0);
             }
         });
 
@@ -325,8 +372,8 @@ public class BikeRoutes{
         temperatureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cupus.initializeTriplet(1);
                 apiCall.setVisibility(View.GONE);
+                Cupus.initializeTriplet(1);
             }
         });
 
@@ -334,8 +381,8 @@ public class BikeRoutes{
         humidityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cupus.initializeTriplet(2);
                 apiCall.setVisibility(View.GONE);
+                Cupus.initializeTriplet(2);
             }
         });
 
@@ -343,8 +390,8 @@ public class BikeRoutes{
         coButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cupus.initializeTriplet(3);
                 apiCall.setVisibility(View.GONE);
+                Cupus.initializeTriplet(3);
             }
         });
 
@@ -352,24 +399,24 @@ public class BikeRoutes{
         noiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cupus.initializeTriplet(4);
                 apiCall.setVisibility(View.GONE);
+                Cupus.initializeTriplet(4);
             }
         });
 
         myRoutesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cupus.initializeTriplet(5);
                 apiCall.setVisibility(View.GONE);
+                Cupus.initializeTriplet(5);
             }
         });
 
         popularRoutesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cupus.initializeTriplet(6);
                 apiCall.setVisibility(View.GONE);
+                Cupus.initializeTriplet(6);
             }
         });
 
@@ -645,8 +692,15 @@ public class BikeRoutes{
             itemizedLayer.addItem(createMarkerItem(p, org.bikeroutes.android.R.drawable.flag_red));
             mapView.map().updateMap(true);
 
-            calcPath(start.getLatitude(), start.getLongitude(), end.getLatitude(),
-                    end.getLongitude());
+            try {
+                calcPath(start.getLatitude(), start.getLongitude(), end.getLatitude(),
+                        end.getLongitude());
+            }
+            catch (Exception e)
+            {
+                log("Please select valid street");
+            }
+
         } else
         {
             start = p;
@@ -733,7 +787,8 @@ public class BikeRoutes{
             // Slanje podataka u bazu
             //***********************************
             try {
-                sql.insertIntoTableBikeRoutes(context, DeviceId,lati,longi,timestamp);
+                //TODO Send only if street is changed, not all positions
+                sql.insertIntoTableBikeRoutes(context, DeviceId, lati, longi,timestamp);
 
             } catch (Exception e) {
                 // TODO Auto-generated catch block

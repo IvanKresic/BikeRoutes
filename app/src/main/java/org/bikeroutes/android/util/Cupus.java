@@ -26,12 +26,12 @@ import java.util.UUID;
  */
 public class Cupus {
 
-    public static Publisher publisherUserData = new Publisher("UserData", Const.getBrokerIpAddress(), 10000);
-    static SQLiteQueries myQueries = new SQLiteQueries();
-    public static Subscriber subscriber;
-    public static TripletSubscription lastSubscription = null;
+    private static Publisher publisherUserData = new Publisher("UserData", Const.getBrokerIpAddress(), 10000);
+    private static SQLiteQueries myQueries = new SQLiteQueries();
+    private static Subscriber subscriber = new Subscriber("clientSubscriber", Const.getBrokerIpAddress(), 10000);
+    private static TripletSubscription lastSubscription = null;
     public static MapView mapView;
-    static int publication_duration = 1800000;
+    private static int category;
 
     public static void unsubscribeFromLastSubscription()
     {
@@ -78,88 +78,105 @@ public class Cupus {
             case 0: // EVENTS
                 lastSubscription = new TripletSubscription(-1, System.currentTimeMillis());
                 lastSubscription.addPredicate(new Triplet("DataType","Event", Operator.EQUAL));
-                initializeSubscriber(lastSubscription, 0);
+                initializeSubscriber(lastSubscription, 0, false);
                 break;
 
             case 1://TEMPERATURE
                 lastSubscription = new TripletSubscription(-1, System.currentTimeMillis());
                 lastSubscription.addPredicate(new Triplet("SensorType","Temperature", Operator.EQUAL));
-                initializeSubscriber(lastSubscription, 1);
+                initializeSubscriber(lastSubscription, 1, false);
                 break;
 
             case 2://HUMIDITY
                 lastSubscription = new TripletSubscription(-1, System.currentTimeMillis());
                 lastSubscription.addPredicate(new Triplet("SensorType","Humidity", Operator.EQUAL));
-                initializeSubscriber(lastSubscription, 2);
+                initializeSubscriber(lastSubscription, 2, false);
                 break;
 
             case 3://CO
                 lastSubscription = new TripletSubscription(-1, System.currentTimeMillis());
                 lastSubscription.addPredicate(new Triplet("SensorType","CO", Operator.EQUAL));
-                initializeSubscriber(lastSubscription, 3);
+                initializeSubscriber(lastSubscription, 3, false);
                 break;
 
             case 4://NOISE
                 lastSubscription = new TripletSubscription(-1, System.currentTimeMillis());
                 lastSubscription.addPredicate(new Triplet("SensorType","Noise", Operator.EQUAL));
-                initializeSubscriber(lastSubscription, 4);
+                initializeSubscriber(lastSubscription, 4, false);
                 break;
 
             case 5://MY ROUTES
                 lastSubscription = new TripletSubscription(-1, System.currentTimeMillis());
-                lastSubscription.addPredicate(new Triplet("DataType","MyRoutes", Operator.EQUAL));
+                lastSubscription.addPredicate(new Triplet("DataType","UserRoutes", Operator.EQUAL));
                 lastSubscription.addPredicate(new Triplet("UUID",Const.DeviceId, Operator.EQUAL));
-                initializeSubscriber(lastSubscription, 5);
+                initializeSubscriber(lastSubscription, 5, false);
                 break;
 
             case 6://POPULAR ROUTES
                 lastSubscription = new TripletSubscription(-1, System.currentTimeMillis());
-                lastSubscription.addPredicate(new Triplet("DataType","PopularRoutes", Operator.EQUAL));
-                initializeSubscriber(lastSubscription, 6);
+                lastSubscription.addPredicate(new Triplet("DataType","MostPopularRoutes", Operator.EQUAL));
+                initializeSubscriber(lastSubscription, 6, true);
                 break;
         }
 
     }
 
-    public static void initializeSubscriber(TripletSubscription ts1, final int shapeType){
+    public static void initializeSubscriber(TripletSubscription ts1, final int shapeType, final boolean popularRoutes){
 
+        /**
+         * TODO - hardcoded boundries - needs to be implemented
+         */
+        //Wien boundries
         Coordinate[] coordinates = new Coordinate[5];
-        coordinates[0] = new Coordinate(45.7788,15.9164);
-        coordinates[1] = new Coordinate(45.7788,16.0236);
-        coordinates[2] = new Coordinate(45.8227,16.0236);
-        coordinates[3] = new Coordinate(45.8227,15.9164);
-        coordinates[4] = new Coordinate(45.7788,15.9164);
+        coordinates[0] = new Coordinate(48.154821, 16.245798);//Bottom-left
+        coordinates[1] = new Coordinate(48.154821, 16.553674);//Bottom-right
+        coordinates[2] = new Coordinate(48.279491, 16.513273);//Top-right
+        coordinates[3] = new Coordinate(48.279491, 16.226498);//Top-left
+        coordinates[4] = new Coordinate(48.154821, 16.245798);//First and last same to close polygon
 
-        subscriber = new Subscriber("clientSubscriber", Const.getBrokerIpAddress(), 10000);
-        subscriber.setNotificationListener(new NotificationListener() {
+
+        //Zagreb boundries
+/*        Coordinate[] coordinates = new Coordinate[5];
+        coordinates[0] = new Coordinate(45.7788,15.9164);//Bottom-left
+        coordinates[1] = new Coordinate(45.7788,16.0236);//Bottom-right
+        coordinates[2] = new Coordinate(45.8227,16.0236);//Top-right
+        coordinates[3] = new Coordinate(45.8227,15.9164);//Top-left
+        coordinates[4] = new Coordinate(45.7788,15.9164);*/
+
+
+        NotificationListener notificationListener = new NotificationListener() {
             @Override
-            public void notify(UUID subscriberId, String subscriberName, Publication publication) {
+            public void notify(UUID uuid, String s, Publication publication) {
                 HashtablePublication notification = (HashtablePublication) publication;
                 final HashMap<String, Object> receivedData = notification.getProperties();
                 System.out.println(publication);
                 Coordinate[] coordinates1 = ((HashtablePublication) publication).getGeometry().getCoordinates();
                 Const.setCoordinates1(coordinates1);
-                SubscriptionClassUI drawSubs = new SubscriptionClassUI();
-                drawSubs.drawSubscriptionOnMap(shapeType);
+                SubscriptionClassUI drawSubscriptions = new SubscriptionClassUI();
+                if (popularRoutes) {
+
+                    category = receivedData.get("Category") != null ? 0 : (int) receivedData.get("Category");
+                }
+                drawSubscriptions.drawSubscriptionOnMap(shapeType, category);
             }
-
-
 
             @Override
             public void notify(UUID uuid, String s, Subscription subscription, boolean b) {
 
             }
-        });
+        };
+
+        subscriber.setNotificationListener(notificationListener);
 
         // connect to the broker
         subscriber.connect();
-        ts1.setGPSCoordinates(coordinates);
+        //ts1.setGPSCoordinates(coordinates, 10000.0);//10.0 is radius, should NOT be important for line strings
         subscriber.subscribe(ts1);
     }
 
 
 
-    public static boolean isConnected()
+    private static boolean isConnected()
     {
         boolean returnType = false;
         try {
@@ -173,17 +190,13 @@ public class Cupus {
         return returnType;
     }
 
-    public static void connectPublisher()
+    private static void connectPublisher()
     {
+        // connect to broker
         if(!publisherUserData.isConnected()) {
-            Log.d("PUBLISHER", Const.getBrokerIpAddress());
-            // connect to broker
+            Log.d("PUBLISHER", "Is publisher connected: " + publisherUserData.isConnected());
             publisherUserData.connect();
         }
-                if(Cupus.isConnected())
-                {
-                    Log.d("PUBLISHER", "Spojio sam se");
-                }
     }
 
 
@@ -198,6 +211,8 @@ public class Cupus {
     public static void sendPublicationCustom() {
         //publisher.isConnected()
         if(true) {
+            connectPublisher();
+            myQueries.setAndConnectUserDataPublisher(publisherUserData);
             myQueries.readFromDatabaseBikeRoutes(Const.getContext());
             if (Const.readyToResetUserDatabase) {
                 myQueries.deleteRecordsFromDatabaseBikeRoutes(Const.getContext());
