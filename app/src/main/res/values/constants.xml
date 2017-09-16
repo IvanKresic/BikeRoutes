@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- COMMON PUBLISH-SUBSCRIBE CONSTANTS -->
+        <string name="data_type">DataType</string>
+        <string name="timestamp">Timestamp</string>
+
+    <!-- CONSTANTS FOR GEO PUBLISH-SUBSCRIBE CONFIGURATION -->
+        <string name="MyRoutes">MyRoutes</string>
+
+    <!-- CONSTANTS FOR ARDUIMO PUBLISH-SUBSCRIBE CONFIGURATION -->
+        <string name="arduino_camel_case">Arduino</string>
+        <string name="sensor_type">SensorType</string>
+        <string name="sensor_value">Value</string>
+        <string name="arduino_publisher_name">ArduinoData</string>
+
+</resources>

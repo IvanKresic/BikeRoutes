@@ -24,8 +24,8 @@ public class SubscriptionClassUI {
     private MapView mapView;
     private ItemizedLayer eventMark;
     private List<ItemizedLayer> listOfItems;
-    private int category;
-    public void drawSubscriptionOnMap(int shapeType, int category) {
+    private long category;
+    public void drawSubscriptionOnMap(int shapeType, long category) {
 
         mapView = Const.getMapView();
        //eventMark = new ItemizedLayer<>(mapView.map(), (MarkerSymbol) null);
@@ -134,7 +134,7 @@ public class SubscriptionClassUI {
         return line;
     }
 
-    private String getColor(int category)
+    private String getColor(long category)
     {
         String pathColor = "";
 

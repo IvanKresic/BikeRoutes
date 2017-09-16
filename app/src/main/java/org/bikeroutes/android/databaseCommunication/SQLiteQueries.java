@@ -12,6 +12,7 @@ import org.bikeroutes.android.R;
 import org.bikeroutes.android.util.Const;
 import com.vividsolutions.jts.geom.Coordinate;
 
+import org.bikeroutes.android.util.Cupus;
 import org.openiot.cupus.artefact.HashtablePublication;
 import org.openiot.cupus.entity.publisher.Publisher;
 
@@ -87,7 +88,7 @@ public class SQLiteQueries  {
             } catch (Exception e) {
                 e.getMessage();
             }
-            HashtablePublication userPublication = new HashtablePublication(-1, System.currentTimeMillis());
+            HashtablePublication userPublication = new HashtablePublication(System.currentTimeMillis() + publication_duration, System.currentTimeMillis());
             userPublication.setProperty("DataType", "RoutesFromUser");
             userPublication.setProperty("UUID", Const.DeviceId);
             userPublication.setProperty("Timestamp", subs);
@@ -132,7 +133,8 @@ public class SQLiteQueries  {
 
     public void readFromDatabaseArduinoData(Context conn)
     {
-        Publisher publisherArduinoData = new Publisher("ArduinoData", Const.getBrokerIpAddress(), 10000);
+        Publisher publisherArduinoData = new Publisher(Const.getContext().getString(R.string.arduino_publisher_name),
+                Const.getBrokerIpAddress(), 10000);
         publisherArduinoData.connect();
         FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(conn);
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -160,18 +162,15 @@ public class SQLiteQueries  {
                 double lat = c.getDouble(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LATITUDE));
                 double longi = c.getDouble(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LONGITUDE));
                 long time = c.getLong(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_TIMESTAPM));
-                //******** TEST *****
 
                 Coordinate[] coordinates = new Coordinate[1];
                 coordinates[0] = new Coordinate(lat, longi);
-                ArduinoPublication.setProperty("DataType","Arduino");
-                ArduinoPublication.setProperty("SensorType", sensorType);
-                ArduinoPublication.setProperty("Value", sensorValue);
-                ArduinoPublication.setProperty("Timestamp", time);
+                ArduinoPublication.setProperty(Const.getContext().getString(R.string.data_type), Const.getContext().getString(R.string.arduino_camel_case));
+                ArduinoPublication.setProperty(Const.getContext().getString(R.string.sensor_type), sensorType);
+                ArduinoPublication.setProperty(Const.getContext().getString(R.string.sensor_value), sensorValue);
+                ArduinoPublication.setProperty(Const.getContext().getString(R.string.timestamp), time);
                 ArduinoPublication.setGPSCoordinates(coordinates);
                 publisherArduinoData.publish(ArduinoPublication);
-                //*******************
-
                 c.moveToNext();
             }
         }
@@ -189,5 +188,4 @@ public class SQLiteQueries  {
         db.close();
         Const.readyToResetArduinoDatabase = false;
     }
-
 }

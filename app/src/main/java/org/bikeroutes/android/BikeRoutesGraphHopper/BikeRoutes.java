@@ -40,7 +40,20 @@ import org.bikeroutes.android.R;
 import org.bikeroutes.android.databaseCommunication.SQLiteQueries;
 import org.bikeroutes.android.util.Const;
 import org.bikeroutes.android.util.Cupus;
+
+import com.graphhopper.routing.util.BikeFlagEncoder;
+import com.graphhopper.routing.util.EdgeFilter;
+import com.graphhopper.routing.util.EncodingManager;
+import com.graphhopper.routing.util.FlagEncoder;
+import com.graphhopper.routing.weighting.FastestWeighting;
+import com.graphhopper.routing.weighting.Weighting;
+import com.graphhopper.storage.GraphBuilder;
+import com.graphhopper.storage.GraphHopperStorage;
+import com.graphhopper.storage.index.LocationIndex;
+import com.graphhopper.storage.index.LocationIndexTree;
+import com.graphhopper.storage.index.QueryResult;
 import com.graphhopper.util.Constants;
+import com.graphhopper.util.EdgeIteratorState;
 import com.graphhopper.util.Helper;
 import com.graphhopper.util.PointList;
 import com.graphhopper.util.ProgressListener;
@@ -130,7 +143,7 @@ public class BikeRoutes {
     private String provider;
     private Activity activity;
     private RelativeLayout mapLayout;
-    VectorTileLayer vectorTileLayer;
+    private VectorTileLayer vectorTileLayer;
 
     public BikeRoutes(Context cont, View view)
     {
@@ -409,6 +422,22 @@ public class BikeRoutes {
             public void onClick(View view) {
                 apiCall.setVisibility(View.GONE);
                 Cupus.initializeTriplet(5);
+                //TODO: remove comment to test if connected to internet
+                try {
+                    if(Const.isConnectedToInternet())
+                    {
+                        Cupus.initializeTriplet(5);
+                    }else
+                    {
+                        String message = "You are not connected to the internet";
+                        logUser(message);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -417,6 +446,22 @@ public class BikeRoutes {
             public void onClick(View view) {
                 apiCall.setVisibility(View.GONE);
                 Cupus.initializeTriplet(6);
+                //TODO: remove comment to test if connected to internet
+                try {
+                    if(Const.isConnectedToInternet())
+                    {
+                        Cupus.initializeTriplet(5);
+                    }else
+                    {
+                        String message = "You are not connected to the internet";
+                        logUser(message);
+                    }
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -542,10 +587,7 @@ public class BikeRoutes {
     private void loadMap( File areaFolder )
     {
         // Long press receiver
-
         mapView.map().layers().add(new LongPressLayer(mapView.map()));
-
-
         // Map file source
         MapFileTileSource tileSource = new MapFileTileSource();
         tileSource.setMapFile(new File(areaFolder, currentArea + ".map").getAbsolutePath());
@@ -553,20 +595,18 @@ public class BikeRoutes {
         mapView.map().setTheme(VtmThemes.DEFAULT);
         mapView.map().layers().add(new BuildingLayer(mapView.map(), l));
         mapView.map().layers().add(new LabelLayer(mapView.map(), l));
-
         // Markers layer
         mapView.map().layers().add(itemizedLayer);
 
         // Map position
         GeoPoint mapCenter = null;
-        try
-        {
+        try {
             mapCenter  = tileSource.getMapInfo().boundingBox.getCenterPoint();
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
             e.getMessage();
         }
+
         mapView.map().setMapPosition(mapCenter.getLatitude(), mapCenter.getLongitude(), 1 << 15);
         mapLayout = (RelativeLayout) Const.savedFragment.findViewById(org.bikeroutes.android.R.id.map_layout);
         mapLayout.addView(mapView, 0);
@@ -576,10 +616,8 @@ public class BikeRoutes {
     private void loadGraphStorage()
     {
         logUser("loading graph (" + Constants.VERSION + ") ... ");
-        new GHAsyncTask<Void, Void, Path>()
-        {
-            protected Path saveDoInBackground( Void... v ) throws Exception
-            {
+        new GHAsyncTask<Void, Void, Path>() {
+            protected Path saveDoInBackground( Void... v ) throws Exception {
                 GraphHopper tmpHopp = new GraphHopper().forMobile();
                 tmpHopp.load(new File(mapsFolder, currentArea).getAbsolutePath());
                 log("found graph " + tmpHopp.getGraphHopperStorage().toString() + ", nodes:" + tmpHopp.getGraphHopperStorage().getNodes());
@@ -589,12 +627,11 @@ public class BikeRoutes {
 
             protected void onPostExecute( Path o )
             {
-                if (hasError())
-                {
+                if (hasError()) {
                     logUser("An error happend while creating graph:"
                             + getErrorMessage());
-                } else
-                {
+                }
+                else {
                     logUser("Finished loading graph. Press long to define where to start and end the route.");
                 }
 
@@ -603,27 +640,14 @@ public class BikeRoutes {
         }.execute();
     }
 
-    private void finishPrepare()
-    {
+    private void finishPrepare() {
         prepareInProgress = false;
         zoom = false;
         Const.setContext(context);
-        //testThis();
     }
 
-    private void testThis()
-    {
-        XmlRenderThemeStyleMenu xmlRenderThemeStyleMenu = new XmlRenderThemeStyleMenu("","","");
-        Map<String, XmlRenderThemeStyleLayer> layerMap = xmlRenderThemeStyleMenu.getLayers();
-        int i=0;
-        while(layerMap.values().iterator().hasNext())
-        {
-            Log.d("Ovo je iz mape",layerMap.get(i).getId());
-        }
-    }
 
     private MarkerItem createMarkerItem(GeoPoint p, int resource) {
-        //Fix this
         Drawable drawable = activity.getApplication().getApplicationContext().getResources().getDrawable(resource);
         Bitmap bitmap = AndroidGraphics.drawableToBitmap(drawable);
         MarkerSymbol markerSymbol = new MarkerSymbol(bitmap, 0.5f, 1);
@@ -640,7 +664,6 @@ public class BikeRoutes {
         new AsyncTask<Void, Void, PathWrapper>()
         {
             float time;
-
             protected PathWrapper doInBackground( Void... v )
             {
                 StopWatch sw = new StopWatch().start();
@@ -680,13 +703,13 @@ public class BikeRoutes {
         if (!isReady())
             return false;
 
-        if (shortestPathRunning)
-        {
+        if (shortestPathRunning) {
             logUser("Calculation still in progress");
             return false;
         }
 
         if (start != null && end == null) {
+            Const.isRouteCalculated = true;
             end = p;
             shortestPathRunning = true;
             itemizedLayer.addItem(createMarkerItem(p, org.bikeroutes.android.R.drawable.flag_red));
@@ -696,30 +719,24 @@ public class BikeRoutes {
                 calcPath(start.getLatitude(), start.getLongitude(), end.getLatitude(),
                         end.getLongitude());
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 log("Please select valid street");
             }
-
-        } else
-        {
+        }
+        else{
             start = p;
             end = null;
 
             // remove all layers but the first one, which is the map
            int temp_layers_size = itemizedLayer.size()-1;
-            Log.d("MAPA", "Sa mape prije brisanja: " +temp_layers_size);
-            if(temp_layers_size > 1)
-            {
-                for (int i = temp_layers_size; i>=1;i--) {
+            if(temp_layers_size > 2) {
+                for (int i = temp_layers_size; i>2;i--) {
                     itemizedLayer.removeItem(i);
                 }
-                Log.d("MAPA", "Sa mape nakon brisanja: " +itemizedLayer.size());
             }
 
-            mapView.map().layers().remove(pathLayer);
-            //itemizedLayer.removeAllItems();
-
+            //mapView.map().layers().remove(pathLayer);
+            itemizedLayer.removeAllItems();
             itemizedLayer.addItem(createMarkerItem(start, org.bikeroutes.android.R.drawable.flag_green));
             mapView.map().updateMap(true);
         }
@@ -779,6 +796,13 @@ public class BikeRoutes {
             mark.geoPoint = position;
             itemizedLayer.addItem(mark);
             itemizedLayer.map().updateMap(true);
+            if(Const.isRouteCalculated)
+                mapView.map().setMapPosition(position.getLatitude(), position.getLongitude(), Const.mapZoomScale);
+            //TODO : check what distance from end point can be considered as destination
+            if((position!= null && end!= null) && position.distance(end) < Const.getDestinationPointRadius()){
+                Cupus.resetMap();
+                log(activity.getApplicationContext().getString(R.string.arrival_to_destination_toast_message));
+           }
             Const.setLatitude(lati);
             Const.setLongitude(longi);
             Const.setTimestamp(timestamp);
@@ -788,8 +812,26 @@ public class BikeRoutes {
             //***********************************
             try {
                 //TODO Send only if street is changed, not all positions
-                sql.insertIntoTableBikeRoutes(context, DeviceId, lati, longi,timestamp);
-
+                FlagEncoder encoder = new BikeFlagEncoder();
+                EncodingManager encodingManager = new EncodingManager(encoder);
+                Weighting weightCalc = new FastestWeighting(encoder);
+                GraphBuilder gb = new GraphBuilder(encodingManager)
+                        .setLocation(mapsFolder.getAbsolutePath()+"/"+Const.fullPathToFile)
+                        .setStore(true)
+                        .setCHGraph(weightCalc)
+                        .set3D(false);
+                final GraphHopperStorage graph = gb.build();
+                graph.loadExisting();
+                final LocationIndex index = new LocationIndexTree(graph, graph.getDirectory());
+                index.loadExisting();
+                int path_id = index.findID(lati, longi);
+                if(Const.getLastPathId() == 0)
+                    Const.setLastPathId(path_id);
+                else if(Const.getLastPathId() != path_id){
+                    sql.insertIntoTableBikeRoutes(context, DeviceId, lati, longi,timestamp);
+                    Const.setLastPathId(path_id);
+                }
+                //TEST
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -813,9 +855,6 @@ public class BikeRoutes {
             // TODO Auto-generated method stub
         }
     }
-
-
-
 
     private boolean isReady()
     {
@@ -876,7 +915,7 @@ public class BikeRoutes {
         Log.e("DEBUG", "onResume of Map Home Fragment");
 
         mapView.onResume();
-        mapView.map().clearMap();
+        //mapView.map().clearMap();
         mapView.map().updateMap(true);
     }
 }

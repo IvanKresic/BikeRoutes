@@ -22,9 +22,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:src="@android:drawable/ic_menu_compass" />
-
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -41,43 +38,43 @@
                 android:id="@+id/my_routes_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="My routes"/>
+                android:text= "@string/myRoutes"/>
             <Button
                 android:id="@+id/popular_routes_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-7dp"
-                android:text="Popular routes"/>
+                android:text="@string/popularRoutes"/>
             <Button
                 android:id="@+id/events_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-7dp"
-                android:text="Events"/>
+                android:text="@string/events"/>
             <Button
                 android:id="@+id/temperature"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-7dp"
-                android:text="Temperature"/>
+                android:text="@string/temperature"/>
             <Button
                 android:id="@+id/humidity"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-7dp"
-                android:text="Humidity"/>
+                android:text="@string/humidity"/>
             <Button
                 android:id="@+id/noise"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-7dp"
-                android:text="Noise"/>
+                android:text="@string/noise"/>
             <Button
                 android:id="@+id/co"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-7dp"
-                android:text="CO"/>
+                android:text="@string/carbon_monokside"/>
 
         </LinearLayout>
         <LinearLayout
@@ -116,7 +113,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Just do It!"/>
+                    android:text="@string/calculateRouteButton"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -136,27 +133,4 @@
         </LinearLayout>
 
     </RelativeLayout>
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp">
-        <TextView
-            android:id="@+id/speed_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="20sp"
-            android:text="Speed: --"
-        />
-        <TextView
-            android:id="@+id/distance_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:textSize="20sp"
-            android:text="Distance: --"
-            />
-    </LinearLayout>
 </RelativeLayout>

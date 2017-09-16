@@ -20,17 +20,17 @@ public abstract class GHAsyncTask<A, B, C> extends AsyncTask<A, B, C>
         }
     }
 
-    public boolean hasError()
+    protected boolean hasError()
     {
         return error != null;
     }
 
-    public Throwable getError()
+    protected Throwable getError()
     {
         return error;
     }
 
-    public String getErrorMessage()
+    protected String getErrorMessage()
     {
         if (hasError())
         {

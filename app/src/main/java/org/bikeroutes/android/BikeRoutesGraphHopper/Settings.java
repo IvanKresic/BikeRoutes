@@ -6,7 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.bikeroutes.android.WifiSocketTask;
+import org.bikeroutes.android.R;
+import org.bikeroutes.android.WifiArduinoSocketTask;
 import org.bikeroutes.android.util.Const;
 import org.bikeroutes.android.util.Cupus;
 
@@ -54,16 +55,14 @@ public class Settings {
             public void onClick(View view) {
                 Timer timer = new Timer();
 
-                if(!buttonToggle)
-                {
+                if(!buttonToggle){
                     Const.setBrokerIpAddress(ipAddress.getText().toString());
                     Const.setDelay(Integer.parseInt(publicationTime.getText().toString()));
                     connectionStatus.setTextColor(con.getResources().getColor(org.bikeroutes.android.R.color.yellow));
-                    connectionStatus.setText("Please wait ...");
+                    connectionStatus.setText(Const.getContext().getString(R.string.please_wait_text));
                     delayedThreadStartTask = new TimerTask() {
                         @Override
                         public void run() {
-
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -78,14 +77,12 @@ public class Settings {
                                     });
                                 }
                             }).start();
-
                         }
                     };
                     timer.schedule(delayedThreadStartTask, Const.getDelay() * 100, Const.getDelay() * 500);
                     buttonToggle = true;
                 }
-                else
-                {
+                else {
                     delayedThreadStartTask.cancel();
                     Cupus.disconnectPublisher();
                     connectionStatus.setText(org.bikeroutes.android.R.string.not_connected);
@@ -97,9 +94,8 @@ public class Settings {
         });
     }
 
-    public static void connectToArduino()
-    {
-        WifiSocketTask mySocket = new WifiSocketTask();
+    public static void connectToArduino(){
+        WifiArduinoSocketTask mySocket = new WifiArduinoSocketTask();
         mySocket.StartArduinoConnectionThread();
     }
 }

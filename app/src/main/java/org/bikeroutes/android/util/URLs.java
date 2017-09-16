@@ -11,5 +11,4 @@ public class URLs {
             + APIKEY + "&latlng=";
 
     public static final String insertStreet = "http://127.0.0.1/rasus/insertStreet.php";
-
 }

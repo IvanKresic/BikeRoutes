@@ -38,7 +38,7 @@ public class GraphHoperAPIAsync extends AsyncTask<String, String, String> {
 
             // Parsiranje json-a
             Gson gson = new Gson();
-            GraphHoperStreetModel model = new GraphHoperStreetModel();
+            GraphHoperStreetModel model;
             model = gson.fromJson(jsonresp, GraphHoperStreetModel.class);
 
             String fullAddress = model.getResults()[0].getFormatted_address();

@@ -11,6 +11,7 @@ import org.bikeroutes.android.R;
 import org.bikeroutes.android.TabsAndFragments.PageFragment;
 import org.oscim.android.MapView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +20,9 @@ import java.util.List;
  */
 public class Const {
 
-    public static List<UserLocationModel> userModel = new ArrayList<>();
-    public static List<ArduinoDataMessageModel> arduinoModel = new ArrayList<>();
-    public static List<SensorReadingsModel> sensorReadingsModelList = new ArrayList<>();
+    private static List<UserLocationModel> userModel = new ArrayList<>();
+    private static List<ArduinoDataMessageModel> arduinoModel = new ArrayList<>();
+    private static List<SensorReadingsModel> sensorReadingsModelList = new ArrayList<>();
     private static String BrokerIpAddress = "161.53.19.88";
     private static String TAG;
     private static int CupusSendDelay = 30;
@@ -38,7 +39,21 @@ public class Const {
     public static boolean readyToResetUserDatabase = false;
     public static boolean readyToResetArduinoDatabase = false;
     public static String fullPathToFile;
+
     public static View savedFragment;
+    private static int lastPathId;
+    public static Boolean isRouteCalculated = false;
+    public static double mapZoomScale = 12.0;
+    private static double destinationPointRadius = 15.0;
+
+
+    public static int getLastPathId() {
+        return lastPathId;
+    }
+
+    public static void setLastPathId(int lastPathId) {
+        Const.lastPathId = lastPathId;
+    }
 
     public static MapView getMapView() {
         return mapView;
@@ -135,6 +150,14 @@ public class Const {
         }
     }
 
+    public static double getDestinationPointRadius() {
+        return destinationPointRadius;
+    }
+
+    public static void setDestinationPointRadius(double destinationPointRadius) {
+        Const.destinationPointRadius = destinationPointRadius;
+    }
+
     public String getTAG()
     {
         return TAG;
@@ -159,6 +182,12 @@ public class Const {
         return sensorReadingsModelList;
     }
 
+    //TODO: This is just workaround. Ping takes too much time. It should check if network exists
+    public static boolean isConnectedToInternet() throws InterruptedException, IOException
+    {
+        String command = "ping -c 1 google.com";
+        return (Runtime.getRuntime().exec (command).waitFor() == 0);
+    }
 
 
     public static List<UserLocationModel> getUserList()

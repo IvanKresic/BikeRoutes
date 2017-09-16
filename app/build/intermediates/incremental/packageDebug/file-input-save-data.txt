@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat May 13 17:37:27 CEST 2017
+#Thu Jun 01 00:49:58 CEST 2017
 835.base=D\:\\Moje\\TheProject\\android\\app\\build\\intermediates\\transforms\\mergeJavaRes\\debug\\jars\\2\\1f\\main.jar
 100.set=ANDROID_RESOURCE
 57.file=D\:\\Moje\\TheProject\\android\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-hdpi-v4\\common_plus_signin_btn_icon_light_pressed.9.png

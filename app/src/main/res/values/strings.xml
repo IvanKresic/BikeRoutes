@@ -21,5 +21,24 @@
     <string name="google_maps_key">AIzaSyBI9uA53_utpBWnKLLs-yiqT94Q4wa0miI</string>
     <string name="broker_ip_address">161.53.19.88</string>
 
-
+    <string name="myRoutes">My Routes</string>
+    <string name="popularRoutes">Popular Routes</string>
+    <string name="events">Events</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="noise">Noise</string>
+    <string name="carbon_monokside">Carbon Monokside</string>
+    <string name="calculateRouteButton">Get Route!</string>
+    <string name="welcome_text">Welcome to Bike Routes!</string>
+    <string name="map_configuration">Map configuration</string>
+    <string name="select_map">Select map to load</string>
+    <string name="current_loaded_map">Current map: </string>
+    <string name="ok_button">OK</string>
+    <string name="publisher_configuration">Publisher Configuration</string>
+    <string name="seconds_lowcase_esclamation_end">seconds!</string>
+    <string name="status">Status</string>
+    <string name="not_connected_status_message">Not connected!</string>
+    <string name="arrival_to_destination_toast_message">You have reached your destination!</string>
+    <string name="no_internet_connection_message">No internet connection</string>
+    <string name="please_wait_text">Please wait ...</string>
 </resources>
